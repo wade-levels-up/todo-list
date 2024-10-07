@@ -27,7 +27,7 @@ aside {
     grid-row: 1/2;
 }
 
-.menu {
+#menu {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -42,11 +42,25 @@ main {
 }
 
 .task {
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
     background-color: black;
     margin: 5px;
     color: var(--txt-col-main2);
-    padding: 5px;
+    padding: 10px;
     border-radius: 10px;
+}
+
+.taskCardDiv {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+input[type='checkbox'] {
+    width: 1.5rem;
+    height: 1.5rem;
 }
 
 

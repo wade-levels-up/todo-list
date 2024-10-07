@@ -1,4 +1,5 @@
 import { Todo } from "./todoClass"
+import { renderTasks } from "./render";
 
 export function createTask() {
     return new Todo(
@@ -14,9 +15,8 @@ export function createTask() {
 }
 
 export function removeTask(id, tasks){
-    let ID = prompt('Id to delete?:'); // replace this with param id later
     for (let i = 0; i < tasks.length; i++) {
-        if (+tasks[i].id === +ID) {
+        if (+tasks[i].id === +id) {
             return i;
         }
     }
