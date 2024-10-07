@@ -39,6 +39,23 @@ main {
     grid-column: 2/3;
     grid-row: 1/2;
     text-align: center;
+    position: relative;
+}
+
+main #add-tasks-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-size: 3rem;
+    border: 1px solid var(--txt-col-main1);
+    border-radius: 50%;
+    background-color: transparent;
+    transition: ease-in-out 500ms;
+}
+
+main #add-tasks-btn:hover {
+    transform: rotate(180deg); 
+    color: green;
 }
 
 .task {
