@@ -16,6 +16,7 @@ export function renderTasks(tasks) {
         taskCard.appendChild(div1);
 
         let div2 = createDOMElement('div', '', 'class', 'taskCardDiv');
+        div2.appendChild(createDOMElement('span', '', 'class', `fa-solid fa-clock dueDate`, 'title', `${task['dueDate']}`));
         div2.appendChild(createDOMElement('div', '', 'class', `fa-solid fa-edit editTaskBtn`));
         let removeTaskBtn = createDOMElement('div', '', 'class', `fa-solid fa-trash removeTaskBtn`, 'data-id', `${task['id']}`);
         removeTaskBtn.onclick = ()=>{
