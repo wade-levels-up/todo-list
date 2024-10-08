@@ -1,5 +1,5 @@
 export function addProject(projects, value){
-
+    projects.push(value);
 }
 
 

@@ -53,7 +53,7 @@ export function renderProjects(array) {
 
     const addNewProject = createDOMElement('li', '+ New Project', 'class', 'projectCard');
     addNewProject.addEventListener('click', ()=>{
-        projectList.push(prompt('New Project Name: '));
+        addProject(projectList, prompt('New Project Name: '));
         renderProjects(projectList);
     })
     projectsMenu.appendChild(addNewProject);
