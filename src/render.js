@@ -39,12 +39,12 @@ export function renderProjects(array) {
 
 
     for (let i = 0; i < array.length; i++) {
-        let project = createDOMElement('li', '', 'class', 'projectCard', 'data-projectName', `${array[i]}`);
+        let project = createDOMElement('li', '', 'class', 'projectCard', 'data-name', `${array[i]}`);
         project.appendChild(createDOMElement('span', '', 'class', 'fa-solid fa-folder'));
         project.appendChild(createDOMElement('p', `${array[i]}`, 'style', 'flex-grow: 1'))
         let deleteBtn = createDOMElement('span', '', 'class', 'fa-solid fa-trash projectDelBtn');
         deleteBtn.addEventListener('click', ()=>{
-            projectList.splice(removeProject(project.dataset.id, projectList), 1);
+            projectList.splice(removeProject(project.dataset.name, projectList), 1);
             renderProjects(projectList);
         })
         project.appendChild(deleteBtn);
@@ -52,5 +52,9 @@ export function renderProjects(array) {
     }
 
     const addNewProject = createDOMElement('li', '+ New Project', 'class', 'projectCard');
+    addNewProject.addEventListener('click', ()=>{
+        projectList.push(prompt('New Project Name: '));
+        renderProjects(projectList);
+    })
     projectsMenu.appendChild(addNewProject);
 }

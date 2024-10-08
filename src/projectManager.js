@@ -2,12 +2,13 @@ export function addProject(projects, value){
 
 }
 
+
+// Refactor later, function misleading, returns index from array;
 export function removeProject(value, projects){
     let projectArr = projects;
     for (let i = 0; i < projectArr.length; i++) {
         if (projectArr[i] === value) {
-            projectArr.splice(i, 1);
+            return i;
         }
     }
-    return projectArr;
 }
