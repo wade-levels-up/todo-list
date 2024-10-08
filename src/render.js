@@ -1,6 +1,8 @@
 import { createDOMElement } from "./createDOMEl";
 import { removeTask } from "./taskManager";
+import { removeProject, addProject } from "./projectManager";
 import { tasks as taskList } from "./index"; 
+import { projects as projectList } from "./index";
 
 export function renderTasks(tasks) {
     let taskContainer = document.querySelector('#task-container');
@@ -29,4 +31,26 @@ export function renderTasks(tasks) {
 
         taskContainer.appendChild(taskCard);
     }
+}
+
+export function renderProjects(array) {
+    const projectsMenu = document.querySelector('#projects');
+    projectsMenu.textContent = '';
+
+
+    for (let i = 0; i < array.length; i++) {
+        let project = createDOMElement('li', '', 'class', 'projectCard', 'data-projectName', `${array[i]}`);
+        project.appendChild(createDOMElement('span', '', 'class', 'fa-solid fa-folder'));
+        project.appendChild(createDOMElement('p', `${array[i]}`, 'style', 'flex-grow: 1'))
+        let deleteBtn = createDOMElement('span', '', 'class', 'fa-solid fa-trash projectDelBtn');
+        deleteBtn.addEventListener('click', ()=>{
+            projectList.splice(removeProject(project.dataset.id, projectList), 1);
+            renderProjects(projectList);
+        })
+        project.appendChild(deleteBtn);
+        projectsMenu.appendChild(project);
+    }
+
+    const addNewProject = createDOMElement('li', '+ New Project', 'class', 'projectCard');
+    projectsMenu.appendChild(addNewProject);
 }

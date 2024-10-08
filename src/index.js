@@ -2,7 +2,7 @@ import "./style.css";
 import { test } from './createDOMEl.js';
 import { Todo } from "./todoClass.js";
 import { sortTasks } from "./sorter.js";
-import { renderTasks } from "./render.js";
+import { renderProjects, renderTasks } from "./render.js";
 import { createTask, removeTask, updateTask } from "./taskManager.js";
 
 const homeTasksBtn = document.querySelector('#home-projects-btn');
@@ -11,6 +11,7 @@ const addTasksBtn = document.querySelector('#add-tasks-btn');
 const updateTasksBtn = document.querySelector('#update-tasks-btn');
 
 export let tasks = [];
+export let projects = ['Home', 'Relationship', 'Work'];
 
 homeTasksBtn.addEventListener('click', ()=>{ renderTasks(sortTasks('project', 'Home', tasks)) });
 allTasksBtn.addEventListener('click', ()=>{ renderTasks(sortTasks(null, null, tasks, true)) });
@@ -22,6 +23,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
     tasks.push(new Todo('Date Night', 'Relationship', 'Go out for dinner with my partner', 'heart', '14/10/24', 'high', false, 1));
     tasks.push(new Todo('Sort Emails', 'Work', 'Deleted all read emails', 'inbox', '2/10/24', 'low', false, 2));
     renderTasks(tasks);
+    renderProjects(projects);
 });
 
 
