@@ -13,18 +13,17 @@ export function renderTasks(tasks) {
         let taskCard = createDOMElement('li', '', 'class', 'task', 'data-id', `${task['id']}`);
         taskCard.appendChild(createDOMElement('input', '', 'type', `checkbox`, 'style', 'accent-color: green'));
         
-        let div1 = createDOMElement('div', '', 'class', 'taskCardDiv');
+        let div1 = createDOMElement('div', '', 'class', 'taskCardDiv1');
         div1.appendChild(createDOMElement('span', '', 'class', `fa-solid fa-${task['icon']}`));
         div1.appendChild(createDOMElement('p', `${task['title']}`));
         taskCard.appendChild(div1);
 
-        let div2 = createDOMElement('div', '', 'class', 'taskCardDiv');
-        div2.appendChild(createDOMElement('span', '', 'class', `fa-solid fa-clock dueDate`, 'title', `${task['dueDate']}`));
+        let div2 = createDOMElement('div', '', 'class', 'taskCardDiv2');
+        div2.appendChild(createDOMElement('span', ` ${task['dueDate']}`, 'class', `dueDate`));
         let updateTaskBtn = createDOMElement('div', '', 'class', `fa-solid fa-edit editTaskBtn`);
         updateTaskBtn.addEventListener('click', ()=>{
             updateTask(taskCard.dataset.id, prompt('Property: '), prompt('Value: '));
             renderTasks(taskList);
-        //    taskList = updateTask(taskCard.dataset.id, prompt('prop'), prompt('val'), taskList);
         })
         div2.appendChild(updateTaskBtn);
         let removeTaskBtn = createDOMElement('div', '', 'class', `fa-solid fa-trash removeTaskBtn`);
@@ -35,6 +34,7 @@ export function renderTasks(tasks) {
         };
         div2.appendChild(removeTaskBtn);
         taskCard.appendChild(div2);
+        taskCard.appendChild(createDOMElement('div', `${task['description']}`, 'class', 'taskCardDiv3'));
 
         taskContainer.appendChild(taskCard);
     }
@@ -47,11 +47,12 @@ export function renderProjects(array) {
 
     for (let i = 0; i < array.length; i++) {
         let project = createDOMElement('li', '', 'class', 'projectCard', 'data-name', `${array[i]}`);
-        project.addEventListener('click', ()=>{
+        project.appendChild(createDOMElement('span', '', 'class', 'fa-solid fa-folder'));
+        let projectName = createDOMElement('p', `${array[i]}`, 'style', 'flex-grow: 1');
+        projectName.addEventListener('click', ()=>{
             renderTasks(sortTasks('project', project.dataset.name, taskList));
         })
-        project.appendChild(createDOMElement('span', '', 'class', 'fa-solid fa-folder'));
-        project.appendChild(createDOMElement('p', `${array[i]}`, 'style', 'flex-grow: 1'))
+        project.appendChild(projectName);
         let deleteBtn = createDOMElement('span', '', 'class', 'fa-solid fa-trash projectDelBtn');
         deleteBtn.addEventListener('click', ()=>{
             projectList.splice(removeProject(project.dataset.name, projectList), 1);

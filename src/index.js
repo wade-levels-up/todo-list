@@ -14,8 +14,10 @@ export let projects = ['Home', 'Relationship', 'Work'];
 
 
 allTasksBtn.addEventListener('click', ()=>{ renderTasks(sortTasks(null, null, tasks, true)) });
-addTasksBtn.addEventListener('click', () => { tasks.push(createTask()) });
-updateTasksBtn.addEventListener('click', ()=> { tasks = updateTask(prompt('id'), prompt('prop'), prompt('val'), tasks)});
+addTasksBtn.addEventListener('click', () => { 
+    tasks.push(createTask());
+    renderTasks(tasks);
+});
 
 window.addEventListener('DOMContentLoaded', ()=>{
     tasks.push(new Todo('Wash Car', 'Home', 'Give the Holden a clean inside and out', 'car', '8/10/24', 'low', false, 0));

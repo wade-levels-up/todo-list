@@ -30,14 +30,3 @@ export function updateTask(id, property, value, tasks) {
         }
     }
 }
-
-// export function updateTask(id, property, value, tasks) {
-//     let modifiedTasks = tasks;
-
-//     for (let i = 0; i < modifiedTasks.length; i++) {
-//         if (+modifiedTasks[i].id === +id) {
-//             modifiedTasks[i][property] = value;
-//         }
-//     }
-//     return modifiedTasks;
-// }
