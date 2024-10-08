@@ -5,7 +5,6 @@ import { sortTasks } from "./sorter.js";
 import { renderProjects, renderTasks } from "./render.js";
 import { createTask, removeTask, updateTask } from "./taskManager.js";
 
-const homeTasksBtn = document.querySelector('#home-projects-btn');
 const allTasksBtn = document.querySelector('#all-projects-btn');
 const addTasksBtn = document.querySelector('#add-tasks-btn');
 const updateTasksBtn = document.querySelector('#update-tasks-btn');
@@ -13,7 +12,7 @@ const updateTasksBtn = document.querySelector('#update-tasks-btn');
 export let tasks = [];
 export let projects = ['Home', 'Relationship', 'Work'];
 
-homeTasksBtn.addEventListener('click', ()=>{ renderTasks(sortTasks('project', 'Home', tasks)) });
+
 allTasksBtn.addEventListener('click', ()=>{ renderTasks(sortTasks(null, null, tasks, true)) });
 addTasksBtn.addEventListener('click', () => { tasks.push(createTask()) });
 updateTasksBtn.addEventListener('click', ()=> { tasks = updateTask(prompt('id'), prompt('prop'), prompt('val'), tasks)});
