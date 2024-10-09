@@ -27,8 +27,6 @@ allTasksBtn.addEventListener('click', ()=>{
     titleDisplay.textContent = 'All Tasks'; 
 });
 addTasksBtn.addEventListener('click', () => { 
-    // tasks.push(createTask());
-    // renderTasks(tasks);
     form.showModal();
 });
 todaysTasksBtn.addEventListener('click', ()=>{
@@ -55,7 +53,7 @@ document.getElementById("taskForm").addEventListener("submit", function (e) {
     console.table(formObject['title'], formObject['project'], formObject['description'], 'star', formObject['date'], formObject['priority'], true, (tasks.length + 1));
     tasks.push(createTask(formObject['title'], formObject['project'], formObject['description'], 'star', formObject['date'], formObject['priority'], true, (tasks.length + 1)));
     renderTasks(tasks);
-  });
+});
 
 
 

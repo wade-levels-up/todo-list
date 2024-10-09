@@ -30,7 +30,6 @@ export function renderTasks(tasks) {
         let removeTaskBtn = createDOMElement('div', '', 'class', `fa-solid fa-trash removeTaskBtn`);
         removeTaskBtn.onclick = ()=>{
             taskList.splice(removeTask(taskCard.dataset.id, taskList), 1);
-            console.table(taskList);
             renderTasks(taskList);
         };
         div2.appendChild(removeTaskBtn);
@@ -44,6 +43,9 @@ export function renderTasks(tasks) {
 export function renderProjects(array) {
     const projectsMenu = document.querySelector('#projects');
     projectsMenu.textContent = '';
+    const projectDropDown = document.querySelector('#tProject');
+    projectDropDown.textContent = '';
+    projectDropDown.appendChild(createDOMElement('option', 'None', 'value', 'None'));
 
 
     for (let i = 0; i < array.length; i++) {
@@ -62,6 +64,8 @@ export function renderProjects(array) {
         })
         project.appendChild(deleteBtn);
         projectsMenu.appendChild(project);
+
+        projectDropDown.appendChild(createDOMElement('option', `${array[i]}`, 'value', `${array[i]}`));
     }
 
     const addNewProject = createDOMElement('li', '+ New Project', 'class', 'projectCard');
