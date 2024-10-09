@@ -10,6 +10,7 @@ export let tasks = [];
 export let projects = ['Home', 'Relationship', 'Work'];
 let todaysDate = new Date();
 let formattedTodaysDate = `${todaysDate.getFullYear()}-${todaysDate.getMonth() + 1}-0${todaysDate.getDate()}`;
+export let addingNewProject = false;
 
 export let titleDisplay = document.querySelector('#displayTitle');
 let form = document.querySelector('dialog');

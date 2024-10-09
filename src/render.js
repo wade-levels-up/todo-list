@@ -6,6 +6,8 @@ import { projects as projectList } from "./index";
 import { titleDisplay } from "./index";
 import { sortTasks } from "./sorter";
 
+let addingNewProject = false;
+
 export function renderTasks(tasks) {
     let taskContainer = document.querySelector('#task-container');
     taskContainer.textContent = '';
@@ -68,10 +70,25 @@ export function renderProjects(array) {
         projectDropDown.appendChild(createDOMElement('option', `${array[i]}`, 'value', `${array[i]}`));
     }
 
-    const addNewProject = createDOMElement('li', '+ New Project', 'class', 'projectCard');
+    const addNewProject = createDOMElement('li', '+ New Project', 'class', 'projectCard inputProj');
     addNewProject.addEventListener('click', ()=>{
-        addProject(projectList, prompt('New Project Name: '));
-        renderProjects(projectList);
+        if (addingNewProject === false) {
+            addingNewProject = true;
+            let inputDiv = createDOMElement('div');
+            let inputProj = createDOMElement('input', '', 'type', 'text');
+            let inputSubmit = createDOMElement('button', 'add');
+            let inputCancel = createDOMElement('button', 'x');
+            inputCancel.addEventListener('click', ()=> {
+                addingNewProject = false;
+                inputDiv.remove();
+            })
+            inputDiv.appendChild(inputProj);
+            inputDiv.appendChild(inputSubmit);
+            inputDiv.appendChild(inputCancel);
+            addNewProject.appendChild(inputDiv);
+            // addProject(projectList, prompt('New Project Name: '));
+            // renderProjects(projectList);
+        } 
     })
     projectsMenu.appendChild(addNewProject);
 }

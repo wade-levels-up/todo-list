@@ -207,4 +207,8 @@ form button:hover {
     margin-top: 30px;
 }
 
+.inputProj { display: flex; align-items: flex-start; flex-wrap: wrap;}
+.inputProj input { width: 70%; }
+.inputProj button { border: none; margin-left: 4px; background-color: transparent; font-size: 1rem; cursor: pointer;}
+
 
