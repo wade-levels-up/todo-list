@@ -9,8 +9,44 @@
 <body>
     <main>
         <h1>ToDo List</h1>
+        <dialog>
+            <form action="" method="dialog">
+                <ul>
+                    <li>
+                        <label for="tTitle">Task name</label>
+                        <input type="text" id="tTitle" name="title">
+                    </li>
+                    <li>
+                        <label for="tProject">Project</label>
+                        <select name="project" id="tProject">
+                            <option value="None">None</option>
+                        </select>
+                    </li>
+                    <li>
+                        <label for="tDate">Due Date</label>
+                        <input type="date" id="tDate" name="date">
+                    </li>
+                    <li>
+                        <label for="tDesc">Description</label>
+                        <textarea name="tDesc" id="tDesc"></textarea>
+                    </li>
+                    <li>
+                        <label for="tPriority">Priority</label>
+                        <select name="priority" id="tPriority">
+                            <option value="High">High</option>
+                            <option value="High">Medium</option>
+                            <option value="High">Low</option>
+                        </select>
+                    </li> 
+                    <div class="modalBtnContainer">
+                        <button type="submit">submit</button>
+                        <button type="reset" id="close-modal-btn">close</button>
+                    </div>
+                </ul>
+            </form>
+        </dialog>
         <div>
-            <h2>Today</h2>
+            <h2 id="displayTitle">All Tasks</h2>
             <ul id="task-container">
             </ul>
         </div>
@@ -19,10 +55,10 @@
     <aside>
         <ul id="menu">
             <li><button id="all-projects-btn">View All Tasks</button></li>
-            <li><button>Today</button></li>
-            <li><button>This Week</button></li>
-            <li><button>This Month</button></li>
-            <li><button>Overdue</button></li>
+            <li><button class="todays-tasks">Today</button></li>
+            <li><button class="weeks-tasks">This Week</button></li>
+            <li><button class="months-tasks">This Month</button></li>
+            <li><button class="overdue-tasks">Overdue</button></li>
         </ul>
         <div>
             <h3>Projects</h3>

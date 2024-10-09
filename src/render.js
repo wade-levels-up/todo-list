@@ -3,6 +3,7 @@ import { removeTask, updateTask } from "./taskManager";
 import { removeProject, addProject } from "./projectManager";
 import { tasks as taskList } from "./index"; 
 import { projects as projectList } from "./index";
+import { titleDisplay } from "./index";
 import { sortTasks } from "./sorter";
 
 export function renderTasks(tasks) {
@@ -51,6 +52,7 @@ export function renderProjects(array) {
         let projectName = createDOMElement('p', `${array[i]}`, 'style', 'flex-grow: 1');
         projectName.addEventListener('click', ()=>{
             renderTasks(sortTasks('project', project.dataset.name, taskList));
+            titleDisplay.textContent = `${array[i]}`;
         })
         project.appendChild(projectName);
         let deleteBtn = createDOMElement('span', '', 'class', 'fa-solid fa-trash projectDelBtn');
