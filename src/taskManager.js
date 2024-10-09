@@ -2,17 +2,8 @@ import { Todo } from "./todoClass"
 import { tasks as taskList } from "./index.js";
 import { renderTasks } from "./render";
 
-export function createTask() {
-    return new Todo(
-        prompt('title:'),
-        prompt('project:'),
-        prompt('desc:'),
-        prompt('icon:'),
-        prompt('dueDate:'),
-        prompt('priority:'),
-        prompt('checklist:'),
-        prompt('id')
-    );
+export function createTask(title, project, desc, icon, dueDate, priority, checklist, id) {
+    return new Todo(title, project, desc, icon, dueDate, priority, checklist, id);
 }
 
 export function removeTask(id, tasks){

@@ -36,13 +36,26 @@ todaysTasksBtn.addEventListener('click', ()=>{
 })
 
 window.addEventListener('DOMContentLoaded', ()=>{
-    tasks.push(new Todo('Wash Car', 'Home', 'Give the Holden a clean inside and out', 'car', '8/10/24', 'low', false, 0));
-    tasks.push(new Todo('Date Night', 'Relationship', 'Go out for dinner with my partner', 'heart', '14/10/24', 'high', false, 1));
-    tasks.push(new Todo('Sort Emails', 'Work', 'Deleted all read emails', 'inbox', '2/10/24', 'low', false, 2));
+    tasks.push(new Todo('Wash Car', 'Home', 'Give the Holden a clean inside and out', 'car', '2024-12-8', 'low', false, 0));
+    tasks.push(new Todo('Date Night', 'Relationship', 'Go out for dinner with my partner', 'heart', '2024-9-3', 'high', false, 1));
+    tasks.push(new Todo('Sort Emails', 'Work', 'Deleted all read emails', 'inbox', '2024-11-6', 'low', false, 2));
     renderTasks(tasks);
     renderProjects(projects);
     console.log(`Today's date is: ${todaysDate}`);
 });
+
+document.getElementById("taskForm").addEventListener("submit", function (e) { 
+  
+    let formData = new FormData(e.target);
+    let formObject = {};
+
+    formData.forEach((value, key) => {
+        formObject[key] = value;
+    });
+    console.table(formObject['title'], formObject['project'], formObject['description'], 'star', formObject['date'], formObject['priority'], true, (tasks.length + 1));
+    tasks.push(createTask(formObject['title'], formObject['project'], formObject['description'], 'star', formObject['date'], formObject['priority'], true, (tasks.length + 1)));
+    renderTasks(tasks);
+  });
 
 
 
