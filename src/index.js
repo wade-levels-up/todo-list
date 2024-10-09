@@ -9,6 +9,7 @@ import { compareAsc, format } from "date-fns";
 export let tasks = [];
 export let projects = ['Home', 'Relationship', 'Work'];
 let todaysDate = new Date();
+let formattedTodaysDate = `${todaysDate.getFullYear()}-${todaysDate.getMonth() + 1}-${todaysDate.getDate()}`;
 
 export let titleDisplay = document.querySelector('#displayTitle');
 let form = document.querySelector('dialog');
@@ -30,7 +31,7 @@ addTasksBtn.addEventListener('click', () => {
     form.showModal();
 });
 todaysTasksBtn.addEventListener('click', ()=>{
-    renderTasks(sortTasks('dueDate', Date(), tasks, null));
+    renderTasks(sortTasks('dueDate', formattedTodaysDate, tasks, null));
 })
 
 window.addEventListener('DOMContentLoaded', ()=>{
@@ -39,7 +40,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
     tasks.push(new Todo('Sort Emails', 'Work', 'Deleted all read emails', 'inbox', '2024-11-6', 'low', false, 2));
     renderTasks(tasks);
     renderProjects(projects);
-    console.log(`Today's date is: ${todaysDate}`);
+    console.log(`Today's date is: ${formattedTodaysDate}`);
 });
 
 document.getElementById("taskForm").addEventListener("submit", function (e) { 
@@ -52,6 +53,7 @@ document.getElementById("taskForm").addEventListener("submit", function (e) {
     });
     console.table(formObject['title'], formObject['project'], formObject['description'], 'star', formObject['date'], formObject['priority'], true, (tasks.length + 1));
     tasks.push(createTask(formObject['title'], formObject['project'], formObject['description'], 'star', formObject['date'], formObject['priority'], true, (tasks.length + 1)));
+    titleDisplay.textContent = 'All Tasks'
     renderTasks(tasks);
 });
 

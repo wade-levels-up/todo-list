@@ -20,7 +20,7 @@ export function renderTasks(tasks) {
         taskCard.appendChild(div1);
 
         let div2 = createDOMElement('div', '', 'class', 'taskCardDiv2');
-        div2.appendChild(createDOMElement('span', ` ${task['dueDate']}`, 'class', `dueDate`));
+        div2.appendChild(createDOMElement('span', `${task['dueDate']}`, 'class', `dueDate`));
         let updateTaskBtn = createDOMElement('div', '', 'class', `fa-solid fa-edit editTaskBtn`);
         updateTaskBtn.addEventListener('click', ()=>{
             updateTask(taskCard.dataset.id, prompt('Property: '), prompt('Value: '));
