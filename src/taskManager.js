@@ -1,5 +1,5 @@
 import { Todo } from "./todoClass"
-import { tasks as taskList } from "./index.js";
+import { saveData, tasks as taskList } from "./index.js";
 import { renderTasks } from "./render";
 
 export function createTask(title, project, desc, icon, dueDate, priority, checklist, id) {

@@ -3,7 +3,7 @@ import { removeTask, updateTask } from "./taskManager";
 import { removeProject, addProject } from "./projectManager";
 import { tasks as taskList } from "./index"; 
 import { projects as projectList } from "./index";
-import { titleDisplay } from "./index";
+import { titleDisplay, saveData, loadData } from "./index";
 import { sortTasks } from "./sorter";
 
 let addingNewProject = false;
@@ -26,12 +26,14 @@ export function renderTasks(tasks) {
             if (task.checklist === true) { 
                 checkBox.checked = false;
                 updateTask(`${task['id']}`, 'checklist', false);
+                saveData();
                 taskCard.style.borderTop = '2px ridge rgb(0, 0, 0, 0.2)';
                 taskCard.style.borderBottom = '2px ridge rgb(0, 0, 0, 0.2)';
                 taskCard.style.backgroundColor = 'rgb(0, 0, 0, 0)';
             } else if (task.checklist === false) {
                 checkBox.checked = true;
                 updateTask(`${task['id']}`, 'checklist', true);
+                saveData();
                 taskCard.style.borderTop = '2px ridge rgb(0, 255, 0, 0.5)';
                 taskCard.style.borderBottom = '2px ridge rgb(0, 255, 0, 0.5)';
                 taskCard.style.backgroundColor = 'rgb(0, 255, 0, 0.2)';
@@ -55,6 +57,7 @@ export function renderTasks(tasks) {
         let removeTaskBtn = createDOMElement('div', '', 'class', `fa-solid fa-trash removeTaskBtn`);
         removeTaskBtn.onclick = ()=>{
             taskList.splice(removeTask(taskCard.dataset.id, taskList), 1);
+            saveData();
             renderTasks(taskList);
         };
         div2.appendChild(removeTaskBtn);
@@ -85,6 +88,7 @@ export function renderProjects(array) {
         let deleteBtn = createDOMElement('span', '', 'class', 'fa-solid fa-trash projectDelBtn');
         deleteBtn.addEventListener('click', ()=>{
             projectList.splice(removeProject(project.dataset.name, projectList), 1);
+            saveData();
             renderProjects(projectList);
         })
         project.appendChild(deleteBtn);
@@ -123,4 +127,5 @@ export function renderProjects(array) {
     })
     projectsMenu.appendChild(addNewProject);
     projectsMenu.appendChild(inputNewProjectDiv);
+    saveData();
 }
