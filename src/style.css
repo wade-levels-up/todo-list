@@ -207,8 +207,8 @@ form button:hover {
     margin-top: 30px;
 }
 
-.inputProj { display: flex; align-items: flex-start; flex-wrap: wrap;}
-.inputProj input { width: 70%; }
-.inputProj button { border: none; margin-left: 4px; background-color: transparent; font-size: 1rem; cursor: pointer;}
-
+.input-project-div { display: flex; }
+.input-project-div input { width: 100%; font-size: 1rem; padding: 3px 8px; border-radius: 10px; }
+.input-project-div button { font-size: 1rem; border: none; background: none; margin: 5px 5px;}
+.input-project-div button:hover { color: green; cursor: pointer;}
 

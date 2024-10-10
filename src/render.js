@@ -70,25 +70,34 @@ export function renderProjects(array) {
         projectDropDown.appendChild(createDOMElement('option', `${array[i]}`, 'value', `${array[i]}`));
     }
 
-    const addNewProject = createDOMElement('li', '+ New Project', 'class', 'projectCard inputProj');
-    addNewProject.addEventListener('click', ()=>{
+    const addNewProject = createDOMElement('li', '+ New Project', 'class', 'projectCard inputProj', 'style', 'display: block');
+    const inputNewProjectDiv = createDOMElement('div', '', 'style', 'display: none', 'class', 'input-project-div');
+    const inputNewProject = createDOMElement('input', '', 'type', 'text');
+    inputNewProjectDiv.appendChild(inputNewProject);
+    const cancelBtn = createDOMElement('button', 'cancel');
+    cancelBtn.addEventListener('click', ()=>{
+        addNewProject.style.display = 'block';
+        inputNewProjectDiv.style.display = 'none';
+        addingNewProject = false;
+    })
+    const addBtn = createDOMElement('button', 'add');
+    addBtn.addEventListener('click', ()=>{
+        projectList.push(inputNewProject.value);
+        console.log(projectList);
+        addNewProject.style.display = 'block';
+        inputNewProjectDiv.style.display = 'none';
+        addingNewProject = false;
+        renderProjects(projectList);
+    })
+    inputNewProjectDiv.appendChild(addBtn);
+    inputNewProjectDiv.appendChild(cancelBtn);
+    addNewProject.addEventListener('click', ()=> {
         if (addingNewProject === false) {
+            addNewProject.style.display = 'none';
+            inputNewProjectDiv.style.display = 'block';
             addingNewProject = true;
-            let inputDiv = createDOMElement('div');
-            let inputProj = createDOMElement('input', '', 'type', 'text');
-            let inputSubmit = createDOMElement('button', 'add');
-            let inputCancel = createDOMElement('button', 'x');
-            inputCancel.addEventListener('click', ()=> {
-                addingNewProject = false;
-                inputDiv.remove();
-            })
-            inputDiv.appendChild(inputProj);
-            inputDiv.appendChild(inputSubmit);
-            inputDiv.appendChild(inputCancel);
-            addNewProject.appendChild(inputDiv);
-            // addProject(projectList, prompt('New Project Name: '));
-            // renderProjects(projectList);
-        } 
+        }
     })
     projectsMenu.appendChild(addNewProject);
+    projectsMenu.appendChild(inputNewProjectDiv);
 }
