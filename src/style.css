@@ -119,6 +119,7 @@ main #add-tasks-btn:hover {
     border-radius: 15px;
     border-top: 2px ridge rgb(0, 0, 0, 0.2);
     border-bottom: 2px ridge rgb(0, 0, 0, 0.2);
+    transition: ease-in-out 400ms;
 }
 
 .taskCardDiv1, .taskCardDiv2 {

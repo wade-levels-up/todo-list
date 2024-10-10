@@ -14,7 +14,30 @@ export function renderTasks(tasks) {
     for (let task of tasks) {
 
         let taskCard = createDOMElement('li', '', 'class', 'task', 'data-id', `${task['id']}`);
-        taskCard.appendChild(createDOMElement('input', '', 'type', `checkbox`, 'style', 'accent-color: green'));
+        let checkBox = createDOMElement('input', '', 'type', `checkbox`, 'data-id', `${task['id']}`);
+        checkBox.style.accentColor = 'green';
+        if (task.checklist === true) { 
+            checkBox.checked = true 
+            taskCard.style.borderTop = '2px ridge rgb(0, 255, 0, 0.5)';
+            taskCard.style.borderBottom = '2px ridge rgb(0, 255, 0, 0.5)';
+            taskCard.style.backgroundColor = 'rgb(0, 255, 0, 0.2)';
+        };
+        checkBox.addEventListener('click', ()=>{
+            if (task.checklist === true) { 
+                checkBox.checked = false;
+                updateTask(`${task['id']}`, 'checklist', false);
+                taskCard.style.borderTop = '2px ridge rgb(0, 0, 0, 0.2)';
+                taskCard.style.borderBottom = '2px ridge rgb(0, 0, 0, 0.2)';
+                taskCard.style.backgroundColor = 'rgb(0, 0, 0, 0)';
+            } else if (task.checklist === false) {
+                checkBox.checked = true;
+                updateTask(`${task['id']}`, 'checklist', true);
+                taskCard.style.borderTop = '2px ridge rgb(0, 255, 0, 0.5)';
+                taskCard.style.borderBottom = '2px ridge rgb(0, 255, 0, 0.5)';
+                taskCard.style.backgroundColor = 'rgb(0, 255, 0, 0.2)';
+            }
+        })
+        taskCard.appendChild(checkBox);
         
         let div1 = createDOMElement('div', '', 'class', 'taskCardDiv1');
         div1.appendChild(createDOMElement('span', '', 'class', `fa-solid fa-${task['icon']}`));
