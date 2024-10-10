@@ -5,6 +5,7 @@ import { tasks as taskList } from "./index";
 import { projects as projectList } from "./index";
 import { titleDisplay, saveData, loadData } from "./index";
 import { sortTasks } from "./sorter";
+import { format } from "date-fns";
 
 let addingNewProject = false;
 
@@ -45,9 +46,9 @@ export function renderTasks(tasks) {
         div1.appendChild(createDOMElement('span', '', 'class', `fa-solid fa-${task['icon']}`));
         div1.appendChild(createDOMElement('p', `${task['title']}`));
         taskCard.appendChild(div1);
-
+        
         let div2 = createDOMElement('div', '', 'class', 'taskCardDiv2');
-        div2.appendChild(createDOMElement('span', `${task['dueDate']}`, 'class', `dueDate`));
+        div2.appendChild(createDOMElement('span', format(`${task['dueDate']}`, 'dd-MM-yyyy'), 'class', `dueDate`));
         let updateTaskBtn = createDOMElement('div', '', 'class', `fa-solid fa-edit editTaskBtn`);
         updateTaskBtn.addEventListener('click', ()=>{
             updateTask(taskCard.dataset.id, prompt('Property: '), prompt('Value: '));

@@ -26,7 +26,7 @@ aside {
     grid-column: 1/2;
     grid-row: 1/2;
     display: grid;
-    grid-template: 1fr 1fr / 1fr;
+    grid-template: 1fr 2fr / 1fr;
     gap: 50px;
     padding: 10px;
 }
@@ -35,7 +35,7 @@ aside {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 1.5rem;
+    gap: 0.5rem;
     height: 100%;
 }
 
@@ -46,6 +46,7 @@ aside {
     text-align: left;
     cursor: pointer;
     width: 100%;
+    font-size: 1rem;
 }
 
 #menu button:hover {
