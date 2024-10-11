@@ -8,6 +8,26 @@ import { sortTasks } from "./sorter";
 import { format } from "date-fns";
 
 let addingNewProject = false;
+let displayTitle = document.querySelector('#displayTitle');
+function displayTitleHandler() {
+    if (viewMode === 'All') {
+        displayAllTasks();
+    } else if (viewMode === 'Today') {
+        displayTodaysTasks();
+    } else if (viewMode === 'Week') {
+        displayWeeksTasks();
+    } else if (viewMode === 'Month') {
+        displayMonthsTasks();
+    } else if (viewMode === 'Overdue') {
+        displayOverdueTasks();
+    } else if (viewMode === 'Project') {
+        renderTasks(taskList.filter((task) => {
+            if (task.project === displayTitle.textContent) {
+                return task;
+            }
+        }));
+    }
+}
 
 export function renderTasks(tasks) {
     let taskContainer = document.querySelector('#task-container');
@@ -59,24 +79,7 @@ export function renderTasks(tasks) {
         removeTaskBtn.onclick = ()=>{
             taskList.splice(removeTask(taskCard.dataset.id, taskList), 1);
             saveData();
-            if (viewMode === 'All') {
-                displayAllTasks();
-            } else if (viewMode === 'Today') {
-                displayTodaysTasks();
-            } else if (viewMode === 'Week') {
-                displayWeeksTasks();
-            } else if (viewMode === 'Month') {
-                displayMonthsTasks();
-            } else if (viewMode === 'Overdue') {
-                displayOverdueTasks();
-            } else if (viewMode === 'Project') {
-                let displayTitle = document.querySelector('#displayTitle');
-                renderTasks(taskList.filter((task) => {
-                    if (task.project === displayTitle.textContent) {
-                        return task;
-                    }
-                }));
-            }
+            displayTitleHandler();
         };
         div2.appendChild(removeTaskBtn);
         taskCard.appendChild(div2);
@@ -106,9 +109,15 @@ export function renderProjects(array) {
         project.appendChild(projectName);
         let deleteBtn = createDOMElement('span', '', 'class', 'fa-solid fa-trash projectDelBtn');
         deleteBtn.addEventListener('click', ()=>{
-            projectList.splice(removeProject(project.dataset.name, projectList), 1);
+            for (let i = 0; i < taskList.length; i++) {
+                if (taskList[i].project === project.dataset.name) {
+                    taskList.splice(i, 1);
+                }
+            }
             saveData();
+            projectList.splice(removeProject(project.dataset.name, projectList), 1);
             renderProjects(projectList);
+            displayTitleHandler();
         })
         project.appendChild(deleteBtn);
         projectsMenu.appendChild(project);
