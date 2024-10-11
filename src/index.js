@@ -15,8 +15,12 @@ export let endOfWeekDate = endOfWeek(todaysDate, {weekStartsOn: 1});
 export let startOfMonthDate = startOfMonth(todaysDate);
 export let endOfMonthDate = endOfMonth(todaysDate);
 
+
 export let titleDisplay = document.querySelector('#displayTitle');
 export let viewMode = 'All';
+export function setViewMode(mode) {
+    viewMode = mode;
+}
 let form = document.querySelector('dialog');
 let closeModalBtn = document.querySelector('#close-modal-btn');
 closeModalBtn.addEventListener('click', ()=> { form.close(); })
@@ -99,11 +103,27 @@ document.getElementById("taskForm").addEventListener("submit", function (e) {
     });
     console.table(formObject['title'], formObject['project'], formObject['description'], 'star', formObject['date'], formObject['priority'], true, (tasks.length + 1));
     tasks.push(createTask(formObject['title'], formObject['project'], formObject['description'], 'star', formObject['date'], formObject['priority'], false, (tasks.length + 1)));
-    titleDisplay.textContent = 'All Tasks';
-    viewMode = 'All';
+    // titleDisplay.textContent = 'All Tasks';
+    // viewMode = 'All';
     saveData();
-    displayAllTasks();
-});
+    if (viewMode === 'All') {
+        displayAllTasks();
+    } else if (viewMode === 'Today') {
+        displayTodaysTasks();
+    } else if (viewMode === 'Week') {
+        displayWeeksTasks();
+    } else if (viewMode === 'Month') {
+        displayMonthsTasks();
+    } else if (viewMode === 'Overdue') {
+        displayOverdueTasks();
+    } else if (viewMode === 'Project') {
+        let displayTitle = document.querySelector('#displayTitle');
+        renderTasks(tasks.filter((task) => {
+            if (task.project === displayTitle.textContent) {
+                return task;
+            }
+        }))
+}});
 
 export function saveData() {
     localStorage.setItem('tasks', JSON.stringify(tasks));

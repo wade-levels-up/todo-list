@@ -3,7 +3,7 @@ import { removeTask, updateTask } from "./taskManager";
 import { removeProject, addProject } from "./projectManager";
 import { tasks as taskList } from "./index"; 
 import { projects as projectList } from "./index";
-import { titleDisplay, saveData, loadData, displayAllTasks, displayMonthsTasks, displayOverdueTasks, displayTodaysTasks, displayWeeksTasks, viewMode } from "./index";
+import { titleDisplay, saveData, loadData, displayAllTasks, displayMonthsTasks, displayOverdueTasks, displayTodaysTasks, displayWeeksTasks, viewMode, setViewMode} from "./index";
 import { sortTasks } from "./sorter";
 import { format } from "date-fns";
 
@@ -69,6 +69,13 @@ export function renderTasks(tasks) {
                 displayMonthsTasks();
             } else if (viewMode === 'Overdue') {
                 displayOverdueTasks();
+            } else if (viewMode === 'Project') {
+                let displayTitle = document.querySelector('#displayTitle');
+                renderTasks(taskList.filter((task) => {
+                    if (task.project === displayTitle.textContent) {
+                        return task;
+                    }
+                }));
             }
         };
         div2.appendChild(removeTaskBtn);
@@ -94,6 +101,7 @@ export function renderProjects(array) {
         projectName.addEventListener('click', ()=>{
             renderTasks(sortTasks('project', project.dataset.name, taskList));
             titleDisplay.textContent = `${array[i]}`;
+            setViewMode('Project');
         })
         project.appendChild(projectName);
         let deleteBtn = createDOMElement('span', '', 'class', 'fa-solid fa-trash projectDelBtn');
