@@ -3,7 +3,7 @@ import { removeTask, updateTask } from "./taskManager";
 import { removeProject, addProject } from "./projectManager";
 import { tasks as taskList } from "./index"; 
 import { projects as projectList } from "./index";
-import { titleDisplay, saveData, loadData } from "./index";
+import { titleDisplay, saveData, loadData, displayAllTasks, displayMonthsTasks, displayOverdueTasks, displayTodaysTasks, displayWeeksTasks, viewMode } from "./index";
 import { sortTasks } from "./sorter";
 import { format } from "date-fns";
 
@@ -59,7 +59,17 @@ export function renderTasks(tasks) {
         removeTaskBtn.onclick = ()=>{
             taskList.splice(removeTask(taskCard.dataset.id, taskList), 1);
             saveData();
-            renderTasks(taskList);
+            if (viewMode === 'All') {
+                displayAllTasks();
+            } else if (viewMode === 'Today') {
+                displayTodaysTasks();
+            } else if (viewMode === 'Week') {
+                displayWeeksTasks();
+            } else if (viewMode === 'Month') {
+                displayMonthsTasks();
+            } else if (viewMode === 'Overdue') {
+                displayOverdueTasks();
+            }
         };
         div2.appendChild(removeTaskBtn);
         taskCard.appendChild(div2);

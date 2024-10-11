@@ -16,6 +16,7 @@ export let startOfMonthDate = startOfMonth(todaysDate);
 export let endOfMonthDate = endOfMonth(todaysDate);
 
 export let titleDisplay = document.querySelector('#displayTitle');
+export let viewMode = 'All';
 let form = document.querySelector('dialog');
 let closeModalBtn = document.querySelector('#close-modal-btn');
 closeModalBtn.addEventListener('click', ()=> { form.close(); })
@@ -28,37 +29,48 @@ const weeksTasksBtn = document.querySelector('.weeks-tasks');
 const overdueTasksBtn = document.querySelector('.overdue-tasks');
 const monthsTasksBtn = document.querySelector('.months-tasks');
 
-
-// Assign button logic
-allTasksBtn.addEventListener('click', ()=>{ 
+// View mode functions
+ export function displayAllTasks() {
     renderTasks(sortTasks(null, null, tasks, true));
     titleDisplay.textContent = 'All Tasks'; 
-});
-addTasksBtn.addEventListener('click', () => { 
-    form.showModal();
-});
-todaysTasksBtn.addEventListener('click', ()=>{
+    viewMode = 'All';
+}
+export function displayTodaysTasks() {
     renderTasks(sortTasks('dueDate', formattedTodaysDate, tasks, null));
     titleDisplay.textContent = `Today's Tasks`;
-})
-weeksTasksBtn.addEventListener('click', ()=>{
+    viewMode = 'Today';
+}
+
+export function displayWeeksTasks() {
     renderTasks(tasks.filter(task => {
         return isWithinInterval(task.dueDate, { start: startOfWeekDate, end: endOfWeekDate });
     }));
     titleDisplay.textContent = `This Week's Tasks`;
-})
-overdueTasksBtn.addEventListener('click', ()=>{
+    viewMode = 'Week';
+}
+
+export function displayOverdueTasks() {
     renderTasks(tasks.filter(task => {
         return task.dueDate < formattedTodaysDate;
     }));
     titleDisplay.textContent = `Overdue Tasks`;
-})
-monthsTasksBtn.addEventListener('click', ()=>{
+    viewMode = 'Overdue';
+}
+
+export function displayMonthsTasks() {
     renderTasks(tasks.filter(task => {
         return isWithinInterval(task.dueDate, { start: startOfMonthDate, end: endOfMonthDate });
     }));
     titleDisplay.textContent = `This Month's Tasks`;
-})
+    viewMode = 'Month';
+}
+// Assign button logic
+allTasksBtn.addEventListener('click', displayAllTasks);
+addTasksBtn.addEventListener('click', () => { form.showModal() });
+todaysTasksBtn.addEventListener('click', displayTodaysTasks);
+weeksTasksBtn.addEventListener('click', displayWeeksTasks);
+overdueTasksBtn.addEventListener('click', displayOverdueTasks);
+monthsTasksBtn.addEventListener('click', displayMonthsTasks);
 
 window.addEventListener('DOMContentLoaded', ()=>{
     if (localStorage.getItem('tasks') && localStorage.getItem('projects')) {
@@ -88,8 +100,9 @@ document.getElementById("taskForm").addEventListener("submit", function (e) {
     console.table(formObject['title'], formObject['project'], formObject['description'], 'star', formObject['date'], formObject['priority'], true, (tasks.length + 1));
     tasks.push(createTask(formObject['title'], formObject['project'], formObject['description'], 'star', formObject['date'], formObject['priority'], false, (tasks.length + 1)));
     titleDisplay.textContent = 'All Tasks';
+    viewMode = 'All';
     saveData();
-    renderTasks(tasks);
+    displayAllTasks();
 });
 
 export function saveData() {
