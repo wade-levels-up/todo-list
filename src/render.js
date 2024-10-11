@@ -107,15 +107,19 @@ export function renderProjects(array) {
         addNewProject.style.display = 'block';
         inputNewProjectDiv.style.display = 'none';
         addingNewProject = false;
-    })
+    });
     const addBtn = createDOMElement('button', 'add');
     addBtn.addEventListener('click', ()=>{
-        projectList.push(inputNewProject.value);
-        console.log(projectList);
-        addNewProject.style.display = 'block';
-        inputNewProjectDiv.style.display = 'none';
-        addingNewProject = false;
-        renderProjects(projectList);
+        if (inputNewProject.value.length > 0) {
+            projectList.push(inputNewProject.value);
+            console.log(projectList);
+            addNewProject.style.display = 'block';
+            inputNewProjectDiv.style.display = 'none';
+            addingNewProject = false;
+            renderProjects(projectList);
+        } else {
+            alert('Please enter at least 1 character');
+        }
     })
     inputNewProjectDiv.appendChild(addBtn);
     inputNewProjectDiv.appendChild(cancelBtn);
