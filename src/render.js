@@ -3,12 +3,14 @@ import { removeTask, updateTask } from "./taskManager";
 import { removeProject, addProject } from "./projectManager";
 import { tasks as taskList } from "./index"; 
 import { projects as projectList } from "./index";
-import { titleDisplay, saveData, loadData, displayAllTasks, displayMonthsTasks, displayOverdueTasks, displayTodaysTasks, displayWeeksTasks, viewMode, setViewMode} from "./index";
+import { titleDisplay, saveData, loadData, displayAllTasks, displayMonthsTasks, displayOverdueTasks, displayTodaysTasks, displayWeeksTasks, viewMode, setViewMode } from "./index";
 import { sortTasks } from "./sorter";
 import { format } from "date-fns";
 
 let addingNewProject = false;
 let displayTitle = document.querySelector('#displayTitle');
+let form = document.querySelector('dialog');
+
 function displayTitleHandler() {
     if (viewMode === 'All') {
         displayAllTasks();
@@ -71,8 +73,9 @@ export function renderTasks(tasks) {
         div2.appendChild(createDOMElement('span', format(`${task['dueDate']}`, 'dd-MM-yyyy'), 'class', `dueDate`));
         let updateTaskBtn = createDOMElement('div', '', 'class', `fa-solid fa-edit editTaskBtn`);
         updateTaskBtn.addEventListener('click', ()=>{
-            updateTask(taskCard.dataset.id, prompt('Property: '), prompt('Value: '));
-            renderTasks(taskList);
+            form.showModal();
+            // updateTask(taskCard.dataset.id, prompt('Property: '), prompt('Value: '));
+            // renderTasks(taskList);
         })
         div2.appendChild(updateTaskBtn);
         let removeTaskBtn = createDOMElement('div', '', 'class', `fa-solid fa-trash removeTaskBtn`);

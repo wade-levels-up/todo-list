@@ -79,7 +79,6 @@ monthsTasksBtn.addEventListener('click', displayMonthsTasks);
 window.addEventListener('DOMContentLoaded', ()=>{
     if (localStorage.getItem('tasks') && localStorage.getItem('projects')) {
         loadData();
-        console.log('loaded tasks from localstorage');
         renderTasks(tasks);
         renderProjects(projects)
     } else {
@@ -88,8 +87,6 @@ window.addEventListener('DOMContentLoaded', ()=>{
         tasks.push(new Todo('Sort Emails', 'Work', 'File away all read emails', 'inbox', '2024-11-6', 'low', false, 2));
         renderTasks(tasks);
         renderProjects(projects);
-        console.log(`Today's date is: ${formattedTodaysDate}`);
-        console.log('No tasks or projects detected in local storage - loading defaults');
         saveData();
     }
 });
@@ -101,7 +98,6 @@ document.getElementById("taskForm").addEventListener("submit", function (e) {
     formData.forEach((value, key) => {
         formObject[key] = value;
     });
-    console.table(formObject['title'], formObject['project'], formObject['description'], 'star', formObject['date'], formObject['priority'], true, (tasks.length + 1));
     tasks.push(createTask(formObject['title'], formObject['project'], formObject['description'], 'star', formObject['date'], formObject['priority'], false, (tasks.length + 1)));
     // titleDisplay.textContent = 'All Tasks';
     // viewMode = 'All';
@@ -128,7 +124,6 @@ document.getElementById("taskForm").addEventListener("submit", function (e) {
 export function saveData() {
     localStorage.setItem('tasks', JSON.stringify(tasks));
     localStorage.setItem('projects', JSON.stringify(projects));
-    console.log(`saved ${tasks} and ${projects}`);
 }
 
 export function loadData() {
