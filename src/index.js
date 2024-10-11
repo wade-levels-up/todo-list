@@ -22,8 +22,11 @@ export function setViewMode(mode) {
     viewMode = mode;
 }
 let form = document.querySelector('#newForm');
+let updateForm = document.querySelector('#updateTaskForm');
 let closeModalBtn = document.querySelector('#close-modal-btn');
+let closeUpdateBtn = document.querySelector('#close-update-btn');
 closeModalBtn.addEventListener('click', ()=> { form.close(); })
+closeUpdateBtn.addEventListener('click', ()=> { updateForm.close(); })
 
 // Identify buttons and store in variables
 const allTasksBtn = document.querySelector('#all-projects-btn');
@@ -98,7 +101,7 @@ document.getElementById("taskForm").addEventListener("submit", function (e) {
     formData.forEach((value, key) => {
         formObject[key] = value;
     });
-    tasks.push(createTask(formObject['title'], formObject['project'], formObject['description'], 'star', formObject['date'], formObject['priority'], false, (tasks.length + 1)));
+    tasks.push(createTask(formObject['title'], formObject['project'], formObject['description'], 'star', formObject['date'], formObject['priority'], false, (tasks.length)));
     // titleDisplay.textContent = 'All Tasks';
     // viewMode = 'All';
     saveData();
@@ -128,7 +131,8 @@ document.getElementById("updateTaskForm").addEventListener("submit", function (e
     formData.forEach((value, key) => {
         formObject[key] = value;
     });
-    tasks.splice((formObject['id']), 1, createTask(formObject['title'], formObject['project'], formObject['description'], formObject['icon'], formObject['date'], formObject['priority'], false, formObject['id']));
+    tasks.splice(+formObject['id'], 1, createTask(formObject['title'], formObject['project'], formObject['description'], formObject['icon'], formObject['date'], formObject['priority'], false, +formObject['id']));
+    console.table(tasks);
     saveData();
     if (viewMode === 'All') {
         displayAllTasks();
