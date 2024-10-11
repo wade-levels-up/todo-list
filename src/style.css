@@ -1,7 +1,7 @@
 :root { 
     font-size: 16px;
-    font-family: system-ui;
-    --bg-col-main1: rgb(255, 242, 235);
+    font-family: 'Trebuchet MS', 'system-ui' 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    --bg-col-main1: rgb(223, 217, 203);
     --bg-col-main2: rgb(255, 238, 225);
     --txt-col-main1: black;
     --txt-col-main2: white;
@@ -29,6 +29,14 @@ aside {
     grid-template: 1fr 2fr / 1fr;
     gap: 50px;
     padding: 10px;
+}
+
+main {
+    background-color: var(--bg-col-main1);
+    grid-column: 2/3;
+    grid-row: 1/2;
+    text-align: center;
+    position: relative;
 }
 
 #menu {
@@ -81,16 +89,9 @@ aside {
     font-size: 0.8rem;
 }
 
-main {
-    background-color: var(--bg-col-main1);
-    grid-column: 2/3;
-    grid-row: 1/2;
-    text-align: center;
-    position: relative;
-}
-
 main #add-tasks-btn {
     position: fixed;
+    top: none;
     bottom: 20px;
     right: 20px;
     font-size: 3rem;
@@ -218,3 +219,181 @@ form button:hover {
 .input-project-div button { font-size: 1rem; border: none; background: none; margin: 5px 5px;}
 .input-project-div button:hover { color: green; cursor: pointer;}
 
+@media only screen and (max-width: 600px) {
+    body {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+    }
+
+    aside {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row-reverse;
+        gap: 0px;
+        padding: 0px;
+        margin: 0px;
+    }
+
+    main {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        overflow: scroll;
+        position: relative;
+    }
+
+    #menu {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        width: 100%;
+        height: max-content;
+        border-top: 2px ridge rgb(0, 0, 0, 0.5);
+        border-bottom: 2px ridge rgb(0, 0, 0, 0.5);
+    }
+
+    #menu button {
+        border: none;
+        background-color: transparent;
+        text-align: left;
+        cursor: pointer;
+        width: 100%;
+        font-size: 0.8rem;
+        padding: 8px;
+    }
+    
+    #menu button:hover {
+        border: none;
+        text-decoration: underline;
+    }
+
+    aside div {
+        display: flex;
+        padding: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+    }
+
+    #projects {
+        display: grid;
+        width: 100%;
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .projectCard {
+        display: flex;
+        justify-content: space-between;
+        border: 1px solid rgb(0, 0, 0, 0.4);
+        border-radius: 5px;
+        background-color: transparent;
+        padding: 3px 8px;
+        text-align: left;
+        cursor: pointer;
+        min-width: 100px;
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+        font-size: 0.9rem;
+    }
+    
+    .projectCard:hover {
+        border-left: none;
+        outline: 5px solid rgb(0, 0, 0, 0.2);
+    }
+    
+    .projectDelBtn {
+        font-size: 0.9rem;
+    }
+
+    main #add-tasks-btn {
+        position: fixed;
+        height: max-content;
+        top: 10px;
+        bottom: none;
+        right: 10px;
+        font-size: 3rem;
+        background-color: transparent;
+        border: none;
+    }
+    
+    main #add-tasks-btn:hover {
+        transition: ease-in-out 500ms;
+        transform: rotate(180deg); 
+        color: green;
+    }
+    
+    #task-container {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .task {
+        display: grid;
+        padding: 15px;
+        background-color: var(--bg-col-main1);
+        color: var(--txt-col-main1);
+        grid-template: 30px max-content / 30px 3fr max-content;
+        border-radius: 15px;
+        border-top: 3px ridge rgb(0, 0, 0, 0.2);
+        border-bottom: 3px ridge rgb(0, 0, 0, 0.2);
+        transition: ease-in-out 400ms;
+    }
+    
+    .taskCardDiv1, .taskCardDiv2 {
+        display: flex;
+        flex-direction: row;
+        gap: 0.6rem;
+        height: max-content;
+    }
+    
+    .taskCardDiv1 {
+        grid-column: 2/3;
+        grid-row: 1/2;
+        font-size: 0.9rem;
+    }
+    
+    .taskCardDiv2 {
+        display: flex;
+        flex-direction: row;
+        grid-column: 3/4;
+        grid-row: 1/2;  
+        font-size: 0.9rem;
+    }
+    
+    .taskCardDiv3 {
+        grid-column: 1/-1;
+        grid-row: 2/3;
+        text-align: left;
+        display: flex;
+        inline-size: 100%;
+        overflow-wrap: break-word;
+        hyphens: auto;
+        font-size: 0.9rem;
+    }
+
+    .input-project-div {
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgb(0, 0, 0, 0.85);
+        top: 0px;
+        left: 0px;
+        padding-top: 50%;
+    }
+
+    .input-project-div input {
+        width: 100%;
+    }
+
+    .input-project-div button {
+        color: aliceblue;
+        margin-top: 15px;
+        border: 1px solid white;
+        border-radius: 10px;
+        padding: 3px;
+        width: 98%;
+    }
+    
+}

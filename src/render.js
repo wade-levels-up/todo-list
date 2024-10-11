@@ -50,15 +50,15 @@ export function renderTasks(tasks) {
                 checkBox.checked = false;
                 updateTask(`${task['id']}`, 'checklist', false);
                 saveData();
-                taskCard.style.borderTop = '2px ridge rgb(0, 0, 0, 0.2)';
-                taskCard.style.borderBottom = '2px ridge rgb(0, 0, 0, 0.2)';
+                taskCard.style.borderTop = '3px ridge rgb(0, 0, 0, 0.2)';
+                taskCard.style.borderBottom = '3px ridge rgb(0, 0, 0, 0.2)';
                 taskCard.style.backgroundColor = 'rgb(0, 0, 0, 0)';
             } else if (task.checklist === false) {
                 checkBox.checked = true;
                 updateTask(`${task['id']}`, 'checklist', true);
                 saveData();
-                taskCard.style.borderTop = '2px ridge rgb(0, 255, 0, 0.5)';
-                taskCard.style.borderBottom = '2px ridge rgb(0, 255, 0, 0.5)';
+                taskCard.style.borderTop = '3px ridge rgb(0, 255, 0, 0.5)';
+                taskCard.style.borderBottom = '3px ridge rgb(0, 255, 0, 0.5)';
                 taskCard.style.backgroundColor = 'rgb(0, 255, 0, 0.2)';
             }
         })
@@ -182,7 +182,9 @@ export function renderProjects(array) {
             addingNewProject = true;
         }
     })
-    projectsMenu.appendChild(addNewProject);
+    if (projectList.length < 6) {
+        projectsMenu.appendChild(addNewProject);
+    }
     projectsMenu.appendChild(inputNewProjectDiv);
     saveData();
 }
