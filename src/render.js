@@ -94,8 +94,6 @@ export function renderTasks(tasks) {
             uTitle.value = task.title;
             updateForm.showModal();
             displayTitleHandler();
-            // updateTask(taskCard.dataset.id, prompt('Property: '), prompt('Value: '));
-            // renderTasks(taskList);
         })
         div2.appendChild(updateTaskBtn);
         let removeTaskBtn = createDOMElement('div', '', 'class', `fa-solid fa-trash removeTaskBtn`);

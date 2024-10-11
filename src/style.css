@@ -119,8 +119,8 @@ main #add-tasks-btn:hover {
     color: var(--txt-col-main1);
     grid-template: 30px max-content / 30px 3fr max-content;
     border-radius: 15px;
-    border-top: 2px ridge rgb(0, 0, 0, 0.2);
-    border-bottom: 2px ridge rgb(0, 0, 0, 0.2);
+    border-top: 3px ridge rgb(0, 0, 0, 0.2);
+    border-bottom: 3px ridge rgb(0, 0, 0, 0.2);
     transition: ease-in-out 400ms;
 }
 

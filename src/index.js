@@ -37,7 +37,7 @@ const overdueTasksBtn = document.querySelector('.overdue-tasks');
 const monthsTasksBtn = document.querySelector('.months-tasks');
 
 // View mode functions
- export function displayAllTasks() {
+export function displayAllTasks() {
     renderTasks(sortTasks(null, null, tasks, true));
     titleDisplay.textContent = 'All Tasks'; 
     viewMode = 'All';
@@ -79,20 +79,19 @@ weeksTasksBtn.addEventListener('click', displayWeeksTasks);
 overdueTasksBtn.addEventListener('click', displayOverdueTasks);
 monthsTasksBtn.addEventListener('click', displayMonthsTasks);
 
-window.addEventListener('DOMContentLoaded', ()=>{
-    if (localStorage.getItem('tasks') && localStorage.getItem('projects')) {
-        loadData();
-        renderTasks(tasks);
-        renderProjects(projects)
-    } else {
-        tasks.push(new Todo('Wash Car', 'Home', 'Give the car a clean inside and out', 'car', '2024-10-13', 'Low', false, 0));
-        tasks.push(new Todo('Date Night', 'Relationship', 'Go out for dinner with my partner', 'heart', '2024-10-12', 'High', false, 1));
-        tasks.push(new Todo('Sort Emails', 'Work', 'File away all read emails', 'inbox', '2024-11-6', 'Medium', false, 2));
-        renderTasks(tasks);
-        renderProjects(projects);
-        saveData();
-    }
-});
+
+if (localStorage.getItem('tasks') && localStorage.getItem('projects')) {
+    loadData();
+    renderTasks(tasks);
+    renderProjects(projects)
+} else {
+    tasks.push(new Todo('Wash Car', 'Home', 'Give the car a clean inside and out', 'car', '2024-10-13', 'Low', false, 0));
+    tasks.push(new Todo('Date Night', 'Relationship', 'Go out for dinner with my partner', 'heart', '2024-10-12', 'High', false, 1));
+    tasks.push(new Todo('Sort Emails', 'Work', 'File away all read emails', 'inbox', '2024-11-6', 'Medium', false, 2));
+    renderTasks(tasks);
+    renderProjects(projects);
+    saveData();
+}
 
 document.getElementById("taskForm").addEventListener("submit", function (e) { 
     let formData = new FormData(e.target);
@@ -102,8 +101,6 @@ document.getElementById("taskForm").addEventListener("submit", function (e) {
         formObject[key] = value;
     });
     tasks.push(createTask(formObject['title'], formObject['project'], formObject['description'], 'star', formObject['date'], formObject['priority'], false, (tasks.length)));
-    // titleDisplay.textContent = 'All Tasks';
-    // viewMode = 'All';
     saveData();
     if (viewMode === 'All') {
         displayAllTasks();
