@@ -110,15 +110,17 @@ export function renderProjects(array) {
     });
     const addBtn = createDOMElement('button', 'add');
     addBtn.addEventListener('click', ()=>{
-        if (inputNewProject.value.length > 0) {
+        if (inputNewProject.value.length <= 13) {
             projectList.push(inputNewProject.value);
             console.log(projectList);
             addNewProject.style.display = 'block';
             inputNewProjectDiv.style.display = 'none';
             addingNewProject = false;
             renderProjects(projectList);
-        } else {
+        } else if (inputNewProject.value.length < 1) {
             alert('Please enter at least 1 character');
+        } else if (inputNewProject.value.length > 13) {
+            alert('Please enter no more than 13 characters');
         }
     })
     inputNewProjectDiv.appendChild(addBtn);
