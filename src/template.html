@@ -9,7 +9,7 @@
 <body>
     <main>
         <h1>ToDo List</h1>
-        <dialog id="newTaskForm">
+        <dialog id="newForm">
             <form id="taskForm" action="" method="dialog">
                 <ul>
                     <li>
@@ -33,10 +33,51 @@
                         <label for="tPriority">Priority</label>
                         <select name="priority" id="tPriority">
                             <option value="High">High</option>
-                            <option value="High">Medium</option>
-                            <option value="High">Low</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Low">Low</option>
                         </select>
                     </li> 
+                    <div class="modalBtnContainer">
+                        <button type="submit">submit</button>
+                        <button type="reset" id="close-modal-btn">close</button>
+                    </div>
+                </ul>
+            </form>
+        </dialog>
+        <dialog id="updateTaskForm">
+            <form id="taskForm" action="" method="dialog">
+                <ul>
+                    <li>
+                        <label for="uTitle">Task name!</label>
+                        <input autofocus type="text" id="uTitle" name="title" maxlength="30" required>
+                    </li>
+                    <li>
+                        <label for="uProject">Project</label>
+                        <select name="project" id="uProject">
+                        </select>
+                    </li>
+                    <li>
+                        <label for="uDate">Due Date</label>
+                        <input type="date" id="uDate" name="date" required>
+                    </li>
+                    <li>
+                        <label for="uDesc">Description</label>
+                        <textarea name="description" id="uDesc" maxlength="100"></textarea>
+                    </li>
+                    <li>
+                        <label for="uPriority">Priority</label>
+                        <select name="priority" id="uPriority">
+                            <option value="High">High</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Low">Low</option>
+                        </select>
+                    </li> 
+                    <li>
+                        <input type="hidden" id="uID" name="id">
+                    </li>
+                    <li>
+                        <input type="hidden" id="uIcon" name="icon">
+                    </li>
                     <div class="modalBtnContainer">
                         <button type="submit">submit</button>
                         <button type="reset" id="close-modal-btn">close</button>

@@ -9,7 +9,7 @@ import { format } from "date-fns";
 
 let addingNewProject = false;
 let displayTitle = document.querySelector('#displayTitle');
-let form = document.querySelector('dialog');
+let updateForm = document.querySelector('#updateTaskForm');
 
 function displayTitleHandler() {
     if (viewMode === 'All') {
@@ -73,7 +73,27 @@ export function renderTasks(tasks) {
         div2.appendChild(createDOMElement('span', format(`${task['dueDate']}`, 'dd-MM-yyyy'), 'class', `dueDate`));
         let updateTaskBtn = createDOMElement('div', '', 'class', `fa-solid fa-edit editTaskBtn`);
         updateTaskBtn.addEventListener('click', ()=>{
-            form.showModal();
+            let uTitle = document.querySelector('#uTitle');
+            let uProject = document.querySelector('#uProject');
+            uProject.textContent = '';
+            uProject.appendChild(createDOMElement('option', `None`, 'value', `None`));
+            for (let proj of projectList) {
+                uProject.appendChild(createDOMElement('option', `${proj}`, 'value', `${proj}`));
+            }
+            let uDate = document.querySelector('#uDate');
+            let uDesc = document.querySelector('#uDesc');
+            let uPriority = document.querySelector('#uPriority');
+            let uID = document.querySelector('#uID');
+            let uIcon = document.querySelector('#uIcon');
+            uIcon.value = task.icon;
+            uID.value = task.id;
+            uPriority.value = task.priority;
+            uDesc.value = task.description;
+            uDate.value = format(task.dueDate, 'yyyy-MM-dd');
+            uProject.value = task.project;
+            uTitle.value = task.title;
+            updateForm.showModal();
+            displayTitleHandler();
             // updateTask(taskCard.dataset.id, prompt('Property: '), prompt('Value: '));
             // renderTasks(taskList);
         })
