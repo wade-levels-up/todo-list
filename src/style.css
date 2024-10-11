@@ -146,6 +146,10 @@ main #add-tasks-btn:hover {
     grid-column: 1/-1;
     grid-row: 2/3;
     text-align: left;
+    display: flex;
+    inline-size: 100%;
+    overflow-wrap: break-word;
+    hyphens: auto;
 }
 
 .task input[type='checkbox'] {
