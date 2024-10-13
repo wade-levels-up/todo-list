@@ -87,7 +87,7 @@ if (localStorage.getItem('tasks') && localStorage.getItem('projects')) {
 } else {
     tasks.push(new Todo('Wash Car', 'Home', 'Give the car a clean inside and out', 'car', '2024-10-13', 'Low', false, 0));
     tasks.push(new Todo('Date Night', 'Relationship', 'Go out for dinner with my partner', 'heart', '2024-10-12', 'High', false, 1));
-    tasks.push(new Todo('Sort Emails', 'Work', 'File away all read emails', 'inbox', '2024-11-6', 'Medium', false, 2));
+    tasks.push(new Todo('Sort Emails', 'Work', 'File away all read emails', 'inbox', '2024-11-06', 'Medium', false, 2));
     renderTasks(tasks);
     renderProjects(projects);
     saveData();
