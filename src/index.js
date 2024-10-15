@@ -104,51 +104,53 @@ weeksTasksBtn.addEventListener("click", displayWeeksTasks);
 overdueTasksBtn.addEventListener("click", displayOverdueTasks);
 monthsTasksBtn.addEventListener("click", displayMonthsTasks);
 
-if (localStorage.getItem("tasks") && localStorage.getItem("projects")) {
-  loadData();
-  renderTasks(tasks);
-  renderProjects(projects);
-} else {
-  tasks.push(
-    new Todo(
-      "Wash Car",
-      "Home",
-      "Give the car a clean inside and out",
-      "car",
-      "2024-10-13",
-      "Low",
-      false,
-      0
-    )
-  );
-  tasks.push(
-    new Todo(
-      "Date Night",
-      "Relationship",
-      "Go out for dinner with my partner",
-      "heart",
-      "2024-10-12",
-      "High",
-      false,
-      1
-    )
-  );
-  tasks.push(
-    new Todo(
-      "Sort Emails",
-      "Work",
-      "File away all read emails",
-      "inbox",
-      "2024-11-06",
-      "Medium",
-      false,
-      2
-    )
-  );
-  renderTasks(tasks);
-  renderProjects(projects);
-  saveData();
-}
+window.addEventListener("DOMContentLoaded", () => {
+  if (localStorage.getItem("tasks") && localStorage.getItem("projects")) {
+    loadData();
+    renderTasks(tasks);
+    renderProjects(projects);
+  } else {
+    tasks.push(
+      new Todo(
+        "Wash Car",
+        "Home",
+        "Give the car a clean inside and out",
+        "car",
+        "2024-10-13",
+        "Low",
+        false,
+        0
+      )
+    );
+    tasks.push(
+      new Todo(
+        "Date Night",
+        "Relationship",
+        "Go out for dinner with my partner",
+        "heart",
+        "2024-10-12",
+        "High",
+        false,
+        1
+      )
+    );
+    tasks.push(
+      new Todo(
+        "Sort Emails",
+        "Work",
+        "File away all read emails",
+        "inbox",
+        "2024-11-6",
+        "Medium",
+        false,
+        2
+      )
+    );
+    renderTasks(tasks);
+    renderProjects(projects);
+    saveData();
+  }
+});
 
 document.getElementById("taskForm").addEventListener("submit", function (e) {
   let formData = new FormData(e.target);
@@ -169,6 +171,8 @@ document.getElementById("taskForm").addEventListener("submit", function (e) {
       tasks.length
     )
   );
+  // titleDisplay.textContent = 'All Tasks';
+  // viewMode = 'All';
   saveData();
   if (viewMode === "All") {
     displayAllTasks();
